@@ -1,0 +1,6 @@
+line-bot-sdk
+FinMind
+tqdm
+PyPortfolioOpt
+yfinance
+scikit-learn
