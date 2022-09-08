@@ -1,0 +1,96 @@
+{
+  "statusCode": 200,
+  "message": "OK",
+  "data": {
+    "quoteFunds": [
+      {
+        "objectType": "FUND",
+        "cnyesId": "A05065",
+        "isin": "<mark>TW00000635U2</mark>",
+        "displayNameLocal": "元大標普高盛黃金ER指數股票型期貨信託基金",
+        "displayName": "Yuanta S&P GSCI Gold ER Futures ETF"
+      },
+      {
+        "objectType": "FUND",
+        "cnyesId": "A1vsOw3",
+        "isin": "<mark>TW</mark>00000763<mark>U</mark><mark>2</mark>",
+        "displayNameLocal": "街口道瓊銅ER指數股票型期貨信託基金",
+        "displayName": "JKO Dow Jones Copper ER Futures ETF"
+      },
+      {
+        "objectType": "FUND",
+        "cnyesId": "A37039",
+        "isin": "<mark>TW</mark>000T3731<mark>U</mark><mark>2</mark>",
+        "displayNameLocal": "國泰中國內需增長基金-美元A",
+        "displayName": "Cathay China Domestic Demand Growth Fund USD"
+      },
+      {
+        "objectType": "FUND",
+        "cnyesId": "A37049",
+        "isin": "<mark>TW</mark>000T3726<mark>U</mark><mark>2</mark>",
+        "displayNameLocal": "國泰中港台基金-美元",
+        "displayName": "Cathay Mandarin USD"
+      },
+      {
+        "objectType": "FUND",
+        "cnyesId": "A05100",
+        "isin": "<mark>TW</mark>00000682<mark>U</mark>4",
+        "displayNameLocal": "元大標普美元ER指數股票型期貨信託基金",
+        "displayName": "Yuanta S&P US Dollar ER Futures ETF"
+      }
+    ],
+    "news": [],
+    "oldDrivers": [
+      {
+        "objectType": "OLD_DRIVER",
+        "driverId": "AC805C15305E9E5BB90BAF53BBDBF9EE1CF03E49",
+        "nickname": "<mark>tw</mark>510",
+        "avatarPicture": "",
+        "return1Year": -31.27559,
+        "yearLowestPerformance": -11.29328,
+        "assetLevel": "超過100萬",
+        "riskLevel": "RR5"
+      },
+      {
+        "objectType": "OLD_DRIVER",
+        "driverId": "1145AF355DF4DB4E263AD9F9344021BFD625FA76",
+        "nickname": "R<mark>2</mark>",
+        "avatarPicture": "https://prod-old-driver-avatar.s3.ap-northeast-1.amazonaws.com/1145AF355DF4DB4E263AD9F9344021BFD625FA76.jpg",
+        "return1Year": 0.0,
+        "yearLowestPerformance": 0.0,
+        "assetLevel": "未滿20萬",
+        "riskLevel": ""
+      },
+      {
+        "objectType": "OLD_DRIVER",
+        "driverId": "113FCFE78055F7B7D54602AA23021CA828DADF9F",
+        "nickname": "Jay<mark>2</mark>",
+        "avatarPicture": "https://prod-old-driver-avatar.s3.ap-northeast-1.amazonaws.com/113FCFE78055F7B7D54602AA23021CA828DADF9F.jpg",
+        "return1Year": 0.0,
+        "yearLowestPerformance": 0.0,
+        "assetLevel": "未滿20萬",
+        "riskLevel": ""
+      },
+      {
+        "objectType": "OLD_DRIVER",
+        "driverId": "972B1179EA6994A00DAA57D343180476B61FAEFE",
+        "nickname": "<mark>tw</mark>1102",
+        "avatarPicture": "",
+        "return1Year": -10.06007,
+        "yearLowestPerformance": -7.37319,
+        "assetLevel": "20-100萬",
+        "riskLevel": "RR3"
+      },
+      {
+        "objectType": "OLD_DRIVER",
+        "driverId": "08C8568D2F8A2DCD99CABFE9A59E6459DCA401AF",
+        "nickname": "<mark>TW</mark>咪咪醬",
+        "avatarPicture": "",
+        "return1Year": 0.0,
+        "yearLowestPerformance": 0.0,
+        "assetLevel": "未滿20萬",
+        "riskLevel": ""
+      }
+    ]
+  }
+}
