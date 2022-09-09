@@ -24,6 +24,7 @@ def read(user_id):
         WHERE user_id = (?)
         '''
     result = conn.execute(sql, data).fetchall()
+
     return result
 
 

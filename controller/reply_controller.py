@@ -369,3 +369,12 @@ def message_allocation_result_wait():
         ),
     ]
     return message
+
+
+def message_allocation_result_less():
+    message = [
+        TextSendMessage(
+            text="關注的清單不夠多喔！"
+        ),
+    ]
+    return message

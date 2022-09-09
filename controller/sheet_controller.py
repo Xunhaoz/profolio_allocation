@@ -2,7 +2,7 @@ import sqlite3
 
 
 def create(user_id, num_questions):
-    answers = [0 for _ in range(num_questions)]
+    answers = [-1 for _ in range(num_questions)]
     conn = sqlite3.connect('database/portfolio_management.db')
     data = [user_id, ] + answers
 
@@ -54,6 +54,6 @@ def write(user_id, question_num, answer):
 def cursor(user_id):
     answers = read(user_id)
     try:
-        return answers.index(0)
-    except ValueError as v:
+        return answers.index(-1)
+    except ValueError:
         return False

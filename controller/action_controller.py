@@ -55,6 +55,8 @@ def action_calculate(line_bot_api, event):
     message = []
     if not user_follow_controller.read(user_id):
         action_user_follow(line_bot_api, event, '@關注清單')
+    elif len(user_follow_controller.read(user_id)) < 2:
+        message += reply_controller.message_allocation_result_less()
     elif user_controller.read_update_time(user_id) > alloc_result_controller.read_update_time(user_id):
         allocation_calculator.allocation_cal(user_id)
         message += reply_controller.message_allocation_result_wait()
