@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/portfolio_allocation.iml" filepath="$PROJECT_DIR$/.idea/portfolio_allocation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/profolio_allocation.iml" filepath="$PROJECT_DIR$/.idea/profolio_allocation.iml" />
     </modules>
   </component>
 </project>

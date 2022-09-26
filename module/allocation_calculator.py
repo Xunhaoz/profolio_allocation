@@ -2,10 +2,10 @@
 import os
 import pprint as pp
 import json
-import argparse
 import logging
 import controller.user_follow_controller as user_follow_controller
 import controller.stock_controller as stock_controller
+
 # Twisted import
 import numpy as np
 import pandas as pd
@@ -13,10 +13,9 @@ from argparse import RawTextHelpFormatter
 from tqdm import tqdm
 import pypfopt
 from pypfopt import expected_returns, risk_models
-import yfinance as yf
 import controller.user_controller as user_controller
 import controller.alloc_result_controller as alloc_result_controller
-import sqlite3
+import yfinance as yf
 
 '''
 This is a scrip which can help calculating better assets allocation from stocks history data. 
@@ -182,38 +181,39 @@ def exec_general_efficient_frontier(expected_returns, covariance_matrix, weight_
 def exec_black_litterman(stock_class_list, stocks_df, covariance_matrix,
                          weight_bounds, target_return, market_neutral, risk_free_rate):
     """將 views, prior套用，預測期望報酬，再計算資產配置權重"""
-    try:
-        with open('module/view.json', 'r') as f:
-            view_dict_all = json.load(f)
-    except EOFError:
-        view_dict_all = {}
+    tickers = []
+    viewdict = {}
+    for stock_class in stock_class_list:
+        tickers.append(stock_class.get_stock_name() + '.TW')
+    prices = yf.download(tickers, period="max")["Adj Close"]
+    for col in prices.columns:
+        viewdict[col] = prices[col].pct_change().dropna().mean() * (252**0.5)
 
-    try:
-        with open('module/mcap.json', 'r') as f:
-            mcap_all = json.load(f)
-    except EOFError:
-        mcap_all = {}
-
-    # 取得股票總市值
     mcaps = {}
-    view_dict = {}
-    for stock in tqdm(stock_class_list):
-        mcaps[stock.get_stock_name()] = mcap_all[stock.get_stock_name()] if stock.get_stock_name() in mcap_all else None
-        view_dict[stock.get_stock_name()] = view_dict_all[stock.get_stock_name()]
+    for t in tickers:
+        stock = yf.Ticker(t)
+        mcaps[t] = stock.info["marketCap"]
+
+    market_prices = yf.download("^TWII", period="max")["Adj Close"]
+
 
     # 在市值中計算取得市場對於回報的估計
-    delta = pypfopt.black_litterman.market_implied_risk_aversion(stocks_df)
-    prior = pypfopt.black_litterman.market_implied_prior_returns(mcaps, delta, covariance_matrix)
+    S = risk_models.CovarianceShrinkage(prices).ledoit_wolf()
+    delta = pypfopt.black_litterman.market_implied_risk_aversion(market_prices)
+    market_prior = pypfopt.black_litterman.market_implied_prior_returns(mcaps, delta, S)
+
 
     # 套入模型計算估計報酬
-    bl = pypfopt.BlackLittermanModel(covariance_matrix, pi=prior, absolute_views=view_dict, prior=prior)
+    bl = pypfopt.BlackLittermanModel(S, pi=market_prior, absolute_views=viewdict)
     rets = bl.bl_returns()
-    ef = pypfopt.efficient_frontier.EfficientFrontier(rets, covariance_matrix, weight_bounds=weight_bounds)
+    S_bl = bl.bl_cov()
+
+    ef = pypfopt.efficient_frontier.EfficientFrontier(rets, S_bl)
 
     if target_return:
         weights = ef.efficient_return(target_return=target_return, market_neutral=market_neutral)
     else:
-        weights = ef.max_sharpe(risk_free_rate=risk_free_rate)
+        weights = ef.max_sharpe()
     result_dict = save_result(weights, ef.clean_weights(), ef.portfolio_performance(), 'False')
     return result_dict
 
@@ -255,9 +255,10 @@ def allocation_cal(user_id):
                                                          args['market_neutral'], args['risk_free_rate'])
     alloc_result_controller.set_efficient_frontier(user_id, efficient_frontier)
 
-    # black_litterman = exec_black_litterman(stock_class_list, stock_df, S, args['weight_bounds'],
-    #                                        args['target_return'], args['market_neutral'], args['risk_free_rate'])
-    # alloc_result_controller.set_risk_party(user_id, black_litterman)
+    black_litterman = exec_black_litterman(stock_class_list, stock_df, S, args['weight_bounds'],
+                                           args['target_return'], args['market_neutral'], args['risk_free_rate'])
+    alloc_result_controller.set_black_litterman(user_id, black_litterman)
+    print(black_litterman)
 
     risky_party = exec_hierarchical_risky_party(stock_df, S, args['risk_free_rate'], 252)
     alloc_result_controller.set_risk_party(user_id, risky_party)

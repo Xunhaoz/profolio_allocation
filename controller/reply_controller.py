@@ -210,17 +210,17 @@ def message_model_type():
                             ),
                         ]
                     ),
-                    # CarouselColumn(
-                    #     thumbnail_image_url=g.GlobalVar.BASE_URL + ''.join(dic_text["6"]).rstrip(),
-                    #     title=''.join(dic_text["7"]),
-                    #     text=''.join(dic_text["8"]),
-                    #     actions=[
-                    #         PostbackTemplateAction(
-                    #             label=''.join(dic_text["2"]),
-                    #             data='action=model&modelType=1'
-                    #         ),
-                    #     ]
-                    # ),
+                    CarouselColumn(
+                        thumbnail_image_url=g.GlobalVar.BASE_URL + ''.join(dic_text["6"]).rstrip(),
+                        title=''.join(dic_text["7"]),
+                        text=''.join(dic_text["8"]),
+                        actions=[
+                            PostbackTemplateAction(
+                                label=''.join(dic_text["2"]),
+                                data='action=model&modelType=1'
+                            ),
+                        ]
+                    ),
                     CarouselColumn(
                         thumbnail_image_url=g.GlobalVar.BASE_URL + ''.join(dic_text["9"]).rstrip(),
                         title=''.join(dic_text["10"]),
