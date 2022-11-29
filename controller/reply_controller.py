@@ -200,7 +200,7 @@ def message_model_type():
             template=CarouselTemplate(
                 columns=[
                     CarouselColumn(
-                        thumbnail_image_url=g.GlobalVar.BASE_URL + ''.join(dic_text["3"]).rstrip(),
+                        thumbnail_image_url='https://i.imgur.com/plQouHN.png',
                         title=''.join(dic_text["4"]),
                         text=''.join(dic_text["5"]),
                         actions=[
@@ -211,7 +211,7 @@ def message_model_type():
                         ]
                     ),
                     CarouselColumn(
-                        thumbnail_image_url=g.GlobalVar.BASE_URL + ''.join(dic_text["6"]).rstrip(),
+                        thumbnail_image_url='https://i.imgur.com/LtxYLZ8.png',
                         title=''.join(dic_text["7"]),
                         text=''.join(dic_text["8"]),
                         actions=[
@@ -222,7 +222,7 @@ def message_model_type():
                         ]
                     ),
                     CarouselColumn(
-                        thumbnail_image_url=g.GlobalVar.BASE_URL + ''.join(dic_text["9"]).rstrip(),
+                        thumbnail_image_url='https://i.imgur.com/iVDWw8F.png',
                         title=''.join(dic_text["10"]),
                         text=''.join(dic_text["11"]),
                         actions=[
@@ -300,7 +300,7 @@ def message_about_us():
     dic_text = load_json_file('text_files/text_about_us.json')
     message = [
         TextSendMessage(
-            text=''.join(dic_text["0"])
+            text='\n'.join(dic_text["0"])
         ),
     ]
     return message
